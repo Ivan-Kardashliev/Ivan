@@ -1,0 +1,103 @@
+import java.util.*;
+
+public class Uchenici {
+    public static void main(String[] args) {
+
+        HashMap<Integer, String> students = new HashMap<>();
+        Scanner scanner = new Scanner(System.in);
+
+        students.put(1, "Александър");
+        students.put(2, "Борислав");
+        students.put(3, "Виктор");
+        students.put(4, "Георги Раленеков");
+        students.put(5, "Георги Георгиев");
+        students.put(6, "Давид");
+        students.put(7, "Данаил");
+        students.put(8, "Даная");
+        students.put(9, "Даниел");
+        students.put(10, "Деница");
+        students.put(11, "Диан");
+        students.put(12, "Димитър Димов");
+        students.put(13, "Димитър Авджиев");
+        students.put(14, "Ивайло");
+        students.put(15, "Иван Кардашлиев");
+        students.put(16, "Иван Христов");
+        students.put(17, "Йордан");
+        students.put(18, "Калин");
+        students.put(19, "Мария");
+        students.put(20, "Нешо");
+
+        String input = "";
+
+        while (!input.equals("5")) {
+
+            System.out.println("\n--- ГЛАВНО МЕНЮ ---");
+            System.out.println("1. [Търси] Име по номер");
+            System.out.println("2. [Добави] Нов ученик");
+            System.out.println("3. [Изтрий] Ученик от списъка");
+            System.out.println("4. [Списък] Покажи целия клас");
+            System.out.println("5. [Изход]");
+            System.out.print("Избор: ");
+
+            input = scanner.next();
+
+            switch (input) {
+
+                case "1":
+                    System.out.print("Въведи номер: ");
+                    int searchNum = scanner.nextInt();
+
+                    if (students.containsKey(searchNum)) {
+                        System.out.println(">> №" + searchNum + " е " + students.get(searchNum));
+                    } else {
+                        System.out.println(">> Няма такъв ученик.");
+                    }
+                    break;
+
+                case "2":
+                    System.out.print("Въведи номер: ");
+                    int newId = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if (students.containsKey(newId)) {
+                        System.out.println(">> Грешка: Този номер вече съществува!");
+                    } else {
+                        System.out.print("Въведи име: ");
+                        String newName = scanner.nextLine();
+
+                        students.put(newId, newName);
+                        System.out.println(">> Ученикът е добавен!");
+                    }
+                    break;
+
+                case "3":
+                    System.out.print("Въведи номер за изтриване: ");
+                    int removeId = scanner.nextInt();
+
+                    if (students.containsKey(removeId)) {
+                        String removed = students.remove(removeId);
+                        System.out.println(">> Премахнат: " + removed);
+                    } else {
+                        System.out.println(">> Няма такъв номер.");
+                    }
+                    break;
+
+                case "4":
+                    System.out.println("\n--- СПИСЪК ---");
+                    TreeMap<Integer, String> sorted = new TreeMap<>(students);
+
+                    for (Integer key : sorted.keySet()) {
+                        System.out.println("№" + key + " - " + sorted.get(key));
+                    }
+                    break;
+
+                case "5":
+                    System.out.println("Приятен ден!");
+                    break;
+
+                default:
+                    System.out.println("Невалиден избор!");
+            }
+        }
+    }
+}
